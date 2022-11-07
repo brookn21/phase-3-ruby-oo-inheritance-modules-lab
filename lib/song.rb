@@ -1,8 +1,12 @@
 require 'pry'
+require_relative '../lib/concerns/memorable.rb'
 
 class Song
   attr_accessor :name
   attr_reader :artist
+
+  extend Memorable::ClassMethods
+  include Memorable::InstanceMethods
 
   @@songs = []
 
@@ -18,13 +22,13 @@ class Song
     @@songs
   end
 
-  def self.reset_all
-    self.all.clear
-  end
+#  def self.reset_all
+ #   self.all.clear
+  #end
 
-  def self.count
-    self.all.count
-  end
+  #def self.count
+   # self.all.count
+  #end
 
   def artist=(artist)
     @artist = artist
@@ -34,3 +38,9 @@ class Song
     name.downcase.gsub(' ', '-')
   end
 end
+
+song1 = Song.new
+
+song1.name = "way back"
+
+p song1.name
